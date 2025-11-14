@@ -51,7 +51,7 @@ def render_sidebar() -> str:
     st.sidebar.divider()
     st.sidebar.markdown("Endpoints:")
     st.sidebar.code(
-        "/api/v1/health\n/api/v1/indicators\n/api/v1/air-quality",
+        "/api/v1/health\n/api/v1/atmo/indices",
         language=None,
     )
     return st.session_state.backend_url
@@ -68,83 +68,58 @@ def tab_health(client: httpx.Client, base_url: str) -> None:
             st.error(f"Erreur: {exc}")
 
 
-def tab_indicators(client: httpx.Client, base_url: str) -> None:
-    st.subheader("Indicateurs")
-    with st.form("indicators_form"):
-        use_city = st.checkbox("Filtrer par city_id", value=False)
-        city_id_val: Optional[int] = None
-        if use_city:
-            city_id_val = st.number_input("city_id", min_value=0, step=1, value=0)
-        indicator_type = st.text_input("type (optionnel)", value="")
-        submitted = st.form_submit_button("Charger")
-
-    if submitted:
-        try:
-            params: Dict[str, Any] = {}
-            if use_city and city_id_val is not None:
-                params["city_id"] = int(city_id_val)
-            if indicator_type.strip():
-                params["type"] = indicator_type.strip()
-            data = http_get(client, f"{base_url}/api/v1/indicators", params=params)
-            if isinstance(data, list) and data:
-                df = pd.DataFrame(data)
-                st.dataframe(df, use_container_width=True)
-            else:
-                st.info("Aucun résultat")
-            with st.expander("Réponse brute"):
-                st.json(data)
-        except Exception as exc:
-            st.error(f"Erreur: {exc}")
-
-
 def to_iso(date_value: date, time_value: time) -> str:
     combined = datetime.combine(date_value, time_value)
     return combined.isoformat()
 
 
-def tab_air_quality(client: httpx.Client, base_url: str) -> None:
-    st.subheader("Qualité de l'air (Geod'air)")
-    st.caption("Renseigner les paramètres puis interroger l'API backend (proxy vers Geod'air).")
+def tab_atmo_indices(client: httpx.Client, base_url: str) -> None:
+    st.subheader("Indice ATMO (Atmo France)")
+    st.caption("Renseigner les paramètres puis interroger l'API backend (proxy vers ATMO).")
     today = datetime.now()
-    with st.form("air_quality_form"):
-        pollutant_code = st.text_input("Code polluant (ex: NO2, PM10...)", value="")
+    with st.form("atmo_indices_form"):
+        code_zone = st.text_input("code_zone (ex: code INSEE/EPCI...)", value="")
         col1, col2 = st.columns(2)
         with col1:
-            start_date = st.date_input("Début (date)", value=today.date())
-            start_time = st.time_input("Début (heure)", value=time(0, 0))
+            date_val = st.date_input("date", value=today.date())
         with col2:
-            end_date = st.date_input("Fin (date)", value=today.date())
-            end_time = st.time_input("Fin (heure)", value=time(23, 59))
-        station = st.text_input("Code station (optionnel)", value="")
+            date_hist_val = st.date_input("date_historique", value=today.date())
         submitted = st.form_submit_button("Interroger")
 
     if submitted:
-        if not pollutant_code.strip():
-            st.warning("Le code polluant est requis.")
-            return
-        start_iso = to_iso(start_date, start_time)
-        end_iso = to_iso(end_date, end_time)
-        params = {
-            "pollutant_code": pollutant_code.strip(),
-            "start": start_iso,
-            "end": end_iso,
-        }
-        if station.strip():
-            params["station"] = station.strip()
+        params: Dict[str, Any] = {}
+        if code_zone.strip():
+            params["code_zone"] = code_zone.strip()
+        # Required
+        params["date"] = date_val.isoformat()
+        params["date_historique"] = date_hist_val.isoformat()
 
         try:
-            data = http_get(client, f"{base_url}/api/v1/air-quality", params=params)
-            # Display best-effort
-            if isinstance(data, dict) and "data" in data and isinstance(data["data"], (list, dict)):
-                # Try to tabularize if list of dicts
-                payload = data["data"]
-                if isinstance(payload, list) and payload and isinstance(payload[0], dict):
-                    df = pd.DataFrame(payload)
-                    st.dataframe(df, use_container_width=True)
-                else:
-                    st.json(payload)
+            data = http_get(client, f"{base_url}/api/v1/atmo/indices", params=params)
+            # Expect strict response: {"results": [{"date", "code_qual"}, ...]}
+            if not (isinstance(data, dict) and isinstance(data.get("results"), list)):
+                st.error("Réponse inattendue du backend. Attendu: { 'results': [ { 'date', 'code_qual' } ] }")
+                with st.expander("Réponse brute"):
+                    st.json(data)
+                return
+            rows = data["results"]
+            timeseries_rows = [
+                {"date": r.get("date"), "code_qual": r.get("code_qual")}
+                for r in rows
+                if isinstance(r, dict) and r.get("date") is not None and r.get("code_qual") is not None
+            ]
+            df_ts = pd.DataFrame(timeseries_rows)
+            if not df_ts.empty:
+                # Only day on x-axis
+                df_ts["date"] = pd.to_datetime(df_ts["date"], errors="coerce").dt.date
+                df_ts = df_ts.dropna(subset=["date"]).sort_values("date")
+                st.line_chart(df_ts.set_index("date")["code_qual"])
+                with st.expander("Données (table)"):
+                    st.dataframe(df_ts, use_container_width=True)
             else:
-                st.json(data)
+                st.info("Aucune donnée de série temporelle trouvée dans la réponse.")
+                with st.expander("Réponse brute"):
+                    st.json(data)
         except Exception as exc:
             st.error(f"Erreur: {exc}")
 
@@ -154,13 +129,11 @@ def main() -> None:
     base_url = render_sidebar()
     client = get_http_client()
 
-    tabs = st.tabs(["Health", "Indicateurs", "Qualité de l'air"])
+    tabs = st.tabs(["Health", "Indice ATMO"])
     with tabs[0]:
         tab_health(client, base_url)
     with tabs[1]:
-        tab_indicators(client, base_url)
-    with tabs[2]:
-        tab_air_quality(client, base_url)
+        tab_atmo_indices(client, base_url)
 
 
 if __name__ == "__main__":
