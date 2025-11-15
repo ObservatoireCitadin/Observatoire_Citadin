@@ -30,7 +30,7 @@ Dans la barre latérale, vous pouvez ajuster l'URL du backend.
 Fonctionnalités:
 - Health: ping `GET /api/v1/health`
 - Indicateurs: liste via `GET /api/v1/indicators?city_id=&type=`
-- Qualité de l'air: via `GET /api/v1/air-quality?pollutant_code=&start=&end=&station=`
+- Indice ATMO: via `GET /api/v1/atmo/indices?code_zone=&date=&date_historique=`
 
 ### Dépannage
 - Erreur « Connection refused »: assurez-vous que le backend tourne (`uvicorn app.main:app --reload`) et que l'URL saisie dans la barre latérale pointe vers la bonne adresse (ex: `http://localhost:8000`).
