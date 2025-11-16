@@ -1,0 +1,1518 @@
+{
+  "rid": "318d1042-79c8-4d39-b337-9d261050cf7d",
+  "title": "5.16 ITDD- Auvergne-Rhône-Alpes - Toutes les communes",
+  "description": "Les données des indicateurs territoriaux correspondant aux 17 objectifs de développement durable.\nCouverture : région Auvergne-Rhône-Alpes\nGranularité : communes\nCode Officiel Géographique INSEE (N-1 du millésime)",
+  "created_at": "2022-09-20T08:56:48.085Z",
+  "last_modified": "2025-02-24T14:28:05.364Z",
+  "published": "2022-09-20T21:00:00.000Z",
+  "temporal_coverage": {
+    "start": "1982-01-01",
+    "end": "2025-01-31"
+  },
+  "millesime": "2025-02",
+  "refs": [],
+  "availableValues": [
+    {
+      "column": "CODGEO_CODE",
+      "values": null
+    },
+    {
+      "column": "CODGEO_LIBELLE",
+      "values": null
+    },
+    {
+      "column": "LIBELLE_VARIABLE",
+      "values": null
+    },
+    {
+      "column": "VARIABLE",
+      "values": null
+    },
+    {
+      "column": "LIBELLE_SOUS_CHAMP",
+      "values": null
+    },
+    {
+      "column": "SOUS_CHAMP",
+      "values": null
+    },
+    {
+      "column": "TYPE_VAR",
+      "values": [
+        "c",
+        "i"
+      ]
+    },
+    {
+      "column": "UNITE",
+      "values": null
+    },
+    {
+      "column": "NO_INDIC",
+      "values": null
+    },
+    {
+      "column": "ODD1",
+      "values": null
+    },
+    {
+      "column": "CIBLE1",
+      "values": null
+    },
+    {
+      "column": "ODD2",
+      "values": [
+        "1",
+        "10",
+        "11",
+        "14",
+        "15",
+        "3",
+        "6",
+        "8",
+        "9",
+        null
+      ]
+    },
+    {
+      "column": "CIBLE2",
+      "values": null
+    },
+    {
+      "column": "A2025",
+      "values": null
+    },
+    {
+      "column": "A2024",
+      "values": null
+    },
+    {
+      "column": "A2023",
+      "values": null
+    },
+    {
+      "column": "A2022",
+      "values": null
+    },
+    {
+      "column": "A2021",
+      "values": null
+    },
+    {
+      "column": "A2020",
+      "values": null
+    },
+    {
+      "column": "A2019",
+      "values": null
+    },
+    {
+      "column": "A2018",
+      "values": null
+    },
+    {
+      "column": "A2017",
+      "values": null
+    },
+    {
+      "column": "A2016",
+      "values": null
+    },
+    {
+      "column": "A2015",
+      "values": null
+    },
+    {
+      "column": "A2014",
+      "values": null
+    },
+    {
+      "column": "A2013",
+      "values": null
+    },
+    {
+      "column": "A2012",
+      "values": null
+    },
+    {
+      "column": "A2011",
+      "values": null
+    },
+    {
+      "column": "A2010",
+      "values": null
+    },
+    {
+      "column": "A2009",
+      "values": null
+    },
+    {
+      "column": "A2008",
+      "values": null
+    },
+    {
+      "column": "A2007",
+      "values": null
+    },
+    {
+      "column": "A2006",
+      "values": null
+    },
+    {
+      "column": "A2005",
+      "values": null
+    },
+    {
+      "column": "A2004",
+      "values": null
+    },
+    {
+      "column": "A2003",
+      "values": null
+    },
+    {
+      "column": "A2002",
+      "values": null
+    },
+    {
+      "column": "A2001",
+      "values": null
+    },
+    {
+      "column": "A2000",
+      "values": null
+    },
+    {
+      "column": "A1999",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1998",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1997",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1996",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1995",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1994",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1993",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1992",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1991",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1990",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1989",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1988",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1987",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1986",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1985",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1984",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1983",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "column": "A1982",
+      "values": [
+        null,
+        0,
+        1
+      ]
+    }
+  ],
+  "extendedFilters": [],
+  "geoFields": [],
+  "columns": [
+    {
+      "name": "CODGEO_CODE",
+      "description": "COG_COMMUNE - Code de la zone",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "CODGEO_LIBELLE",
+      "description": "COG_COMMUNE - Libellé de la zone",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "LIBELLE_VARIABLE",
+      "description": "Libellé de la variable",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "VARIABLE",
+      "description": "Variable",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "LIBELLE_SOUS_CHAMP",
+      "description": "Libellé du sous-champ",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "SOUS_CHAMP",
+      "description": "Sous-champ",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "TYPE_VAR",
+      "description": "Type de variable",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        "c",
+        "i"
+      ]
+    },
+    {
+      "name": "UNITE",
+      "description": "Unité",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "NO_INDIC",
+      "description": "Numéro de l’indicateur",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "ODD1",
+      "description": "ODD1",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "CIBLE1",
+      "description": "Cible1",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "ODD2",
+      "description": "ODD2",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        "1",
+        "10",
+        "11",
+        "14",
+        "15",
+        "3",
+        "6",
+        "8",
+        "9",
+        null
+      ]
+    },
+    {
+      "name": "CIBLE2",
+      "description": "Cible2",
+      "unit": "n/a",
+      "type": "string",
+      "filters": [
+        "contains",
+        "eq",
+        "ne",
+        "startsWith",
+        "endsWith",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2025",
+      "description": "A2025",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2024",
+      "description": "A2024",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2023",
+      "description": "A2023",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2022",
+      "description": "A2022",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2021",
+      "description": "A2021",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2020",
+      "description": "A2020",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2019",
+      "description": "A2019",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2018",
+      "description": "A2018",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2017",
+      "description": "A2017",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2016",
+      "description": "A2016",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2015",
+      "description": "A2015",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2014",
+      "description": "A2014",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2013",
+      "description": "A2013",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2012",
+      "description": "A2012",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2011",
+      "description": "A2011",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2010",
+      "description": "A2010",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2009",
+      "description": "A2009",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2008",
+      "description": "A2008",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2007",
+      "description": "A2007",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2006",
+      "description": "A2006",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2005",
+      "description": "A2005",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2004",
+      "description": "A2004",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2003",
+      "description": "A2003",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2002",
+      "description": "A2002",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2001",
+      "description": "A2001",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A2000",
+      "description": "A2000",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": null
+    },
+    {
+      "name": "A1999",
+      "description": "A1999",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1998",
+      "description": "A1998",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1997",
+      "description": "A1997",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1996",
+      "description": "A1996",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1995",
+      "description": "A1995",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1994",
+      "description": "A1994",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1993",
+      "description": "A1993",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1992",
+      "description": "A1992",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1991",
+      "description": "A1991",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1990",
+      "description": "A1990",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1989",
+      "description": "A1989",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1988",
+      "description": "A1988",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1987",
+      "description": "A1987",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1986",
+      "description": "A1986",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1985",
+      "description": "A1985",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1984",
+      "description": "A1984",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1983",
+      "description": "A1983",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "A1982",
+      "description": "A1982",
+      "unit": "n/a",
+      "type": "number",
+      "precision": null,
+      "filters": [
+        "eq",
+        "ne",
+        "gt",
+        "gte",
+        "lt",
+        "lte",
+        "in",
+        "nin"
+      ],
+      "availableValues": [
+        null,
+        0,
+        1
+      ]
+    }
+  ],
+  "rows": 1767853,
+  "date_diffusion": "2025-02-24T14:28:05.079Z",
+  "weburl": "https://www.statistiques.developpement-durable.gouv.fr/catalogue?page=datafile&datafileRid=318d1042-79c8-4d39-b337-9d261050cf7d&datafileMillesime=2025-02",
+  "views": 159,
+  "downloads": 2243,
+  "dataset": {
+    "id": "632956d8eae137714f60ae22",
+    "title": "Indicateurs territoriaux de développement durable (ITDD)",
+    "description": "Pour éclairer les démarches territoriales de développement durable, l'<a href=\"https://www.insee.fr/fr/accueil\">Insee</a> et le <a href=\"https://www.statistiques.developpement-durable.gouv.fr/\">SDES</a> (Service des données et études statistiques) se sont associés pour mettre à disposition un ensemble d’indicateurs sur les Objectifs de développement durable (ODD), cohérents avec l’<a href=\"https://www.agenda-2030.fr/\">agenda 2030</a>. Ces indicateurs permettent des approches à plusieurs niveaux : national, régional, départemental et communal.\nLes indicateurs livrés sont amenés à évoluer lors d'actualisations futures.\nEn complément des données mises à disposition, une documentation complète est fournie : un dictionnaire des variables, un guide d'utilisation et des fiches de métadonnées.",
+    "topic": "Environnement",
+    "tags": [
+      "developpement-durable",
+      "indicateur",
+      "territoire"
+    ],
+    "license": "fr-lo",
+    "frequency": "annual",
+    "frequency_date": "2026-01-31",
+    "spatial": {
+      "zones": [
+        "country:fr"
+      ],
+      "granularity": "fr:commune"
+    },
+    "temporal_coverage": {
+      "start": "1954-01-01",
+      "end": "2025-01-31"
+    },
+    "created_at": "2022-09-20T05:59:52.275Z",
+    "last_modified": "2025-02-24T14:34:06.760Z",
+    "last_update": "2025-02-24T14:34:06.760Z",
+    "organization": {
+      "id": "6273cf1eed00fe6d6695e146",
+      "title": "Bureau de l'appui et de la coordination statistiques",
+      "description": "Bureau de l'appui et de la coordination statistiques",
+      "acronym": "CGDD/SDES/BACS"
+    },
+    "weburl": "https://www.statistiques.developpement-durable.gouv.fr/catalogue?page=dataset&datasetId=632956d8eae137714f60ae22",
+    "views": 10704,
+    "attachments": [
+      {
+        "rid": "1cda3028-6a3f-4712-a72f-90ef69d18bf1",
+        "type": "documentation",
+        "title": "6.01 Dictionnaire des données",
+        "description": "Dictionnaire des indicateurs territoriaux de développement durable\nVersion 2025",
+        "published": "2023-01-17T22:00:00.000Z",
+        "url": "https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/1cda3028-6a3f-4712-a72f-90ef69d18bf1",
+        "created_at": "2022-09-20T06:04:25.961Z",
+        "last_modified": "2025-02-24T14:34:06.534Z",
+        "downloads": 1008
+      },
+      {
+        "rid": "901612a1-675a-4af1-8d0f-057120ebaf03",
+        "type": "documentation",
+        "title": "6.02 Guide d'utilisation",
+        "description": "Guide d'utilisation\nVersion 2025",
+        "published": "2023-01-17T22:00:00.000Z",
+        "url": "https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/901612a1-675a-4af1-8d0f-057120ebaf03",
+        "created_at": "2022-09-20T06:03:47.194Z",
+        "last_modified": "2025-02-18T15:37:50.417Z",
+        "downloads": 471
+      },
+      {
+        "rid": "b5453a4c-f48e-41ee-8b43-865add73365e",
+        "type": "documentation",
+        "title": "6.03 Fiches des indicateurs",
+        "description": "Un fichier de détail pour chaque indicateur est proposé au format PDF.\nL'archive les contient tous.\nVersion 2025",
+        "published": "2023-01-17T22:00:00.000Z",
+        "url": "https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/b5453a4c-f48e-41ee-8b43-865add73365e",
+        "created_at": "2022-09-20T06:03:03.980Z",
+        "last_modified": "2025-02-18T14:16:16.926Z",
+        "downloads": 586
+      },
+      {
+        "rid": "62b9c69b-ab6f-4428-b190-42a7da399376",
+        "type": "documentation",
+        "title": "6.04 Liste des indicateurs par ODD",
+        "description": "Liste des indicateurs par ODD\nVersion 2025",
+        "published": "2023-01-16T23:00:00.000Z",
+        "url": "https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/62b9c69b-ab6f-4428-b190-42a7da399376",
+        "created_at": "2023-01-24T12:24:24.710Z",
+        "last_modified": "2025-02-18T14:13:59.313Z",
+        "downloads": 471
+      },
+      {
+        "rid": "2a2f7fee-dde0-4ba0-b2f2-43166545fde0",
+        "type": "documentation",
+        "title": "6.05 Versions antérieures des fichiers annexes",
+        "description": "Contient les anciens fichiers annexes\nAnnées contenues :\n- 2022\n- 2023\n- 2024",
+        "published": "2023-01-16T23:00:00.000Z",
+        "url": "https://data.statistiques.developpement-durable.gouv.fr/dido/api/files/2a2f7fee-dde0-4ba0-b2f2-43166545fde0",
+        "created_at": "2023-01-24T12:27:18.384Z",
+        "last_modified": "2025-02-18T14:13:01.037Z",
+        "downloads": 172
+      }
+    ]
+  },
+  "next_millesime_href": "https://www.statistiques.developpement-durable.gouv.fr/catalogue?page=datafile&datafileRid=318d1042-79c8-4d39-b337-9d261050cf7d&datafileMillesime=2024-01"
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "63ecb0418b083b02288edf23",
+    "title": "Données nationales sur la commercialisation des logements neufs"
+  },
+  {
+    "id": "63ecb013d3616ab39e722df2",
+    "title": "Données régionales sur la commercialisation des logements neufs"
+  },
+  {
+    "id": "63ecafe2c23793f3638edf24",
+    "title": "Données départementales sur la commercialisation des logements neufs"
+  },
+  {
+    "id": "63ecaef1c23793f3638edf23",
+    "title": "Données selon le zonage ABC sur la commercialisation des logements neufs"
+  },
+  {
+    "id": "675c0ad59718fa4d74fc907c",
+    "title": "Entrepôts et plateformes logistiques"
+  },
+  {
+    "id": "653a73851c7e074730ec5b5b",
+    "title": "Locaux non résidentiels autorisés et commencés, séries mensuelles"
+  },
+  {
+    "id": "631b03afb61e5c6479370169",
+    "title": "Conjoncture mensuelle de l'énergie"
+  },
+  {
+    "id": "660432ce0b8987ef5dd9465d",
+    "title": "Logements autorisés et commencés, séries mensuelles communales en date de prise en compte"
+  },
+  {
+    "id": "6513f0189d7d312c80ec5b5b",
+    "title": "Liste des permis de construire et autres autorisations d’urbanisme"
+  },
+  {
+    "id": "6513ef5f3b05e5cd969c2711",
+    "title": "Locaux non résidentiels autorisés et commencés, en séries annuelles"
+  },
+  {
+    "id": "6513eed03b05e5cd969c2710",
+    "title": "Logements autorisés et commencés, nombre et surfaces, séries mensuelles"
+  },
+  {
+    "id": "6513ee3a3b05e5cd969c270f",
+    "title": "Logements autorisés et commencés, nombre et surfaces, séries annuelles"
+  },
+  {
+    "id": "6102466697d9291fc5ce2d70",
+    "title": "Données locales de consommation d'électricité et de gaz naturel et de chaleur et de froid - adresse (à partir de 2018)"
+  },
+  {
+    "id": "610247f1e43667219cec5da8",
+    "title": "Données locales de consommation d'électricité et de gaz naturel - région (à partir de 2018)"
+  },
+  {
+    "id": "610244c9e436671e84ec5da8",
+    "title": "Données locales de consommation d'électricité, de gaz naturel et de chaleur et de froid - IRIS (à partir de 2018)"
+  },
+  {
+    "id": "6102486fe436672220ec5da8",
+    "title": "Données locales de consommation d'électricité et de gaz naturel - EPCI (à partir de 2018)"
+  },
+  {
+    "id": "6102491997d9292269ce2d70",
+    "title": "Données locales de consommation de chaleur et de froid - commune (à partir de 2018)"
+  },
+  {
+    "id": "610244a997d9291e03ce2d70",
+    "title": "Données mensuelles de consommation de produits pétroliers (à partir de 2017)"
+  },
+  {
+    "id": "6102445fe436671e1cec5da8",
+    "title": "Données locales de consommation de produits pétroliers - département (à partir de 2005)"
+  },
+  {
+    "id": "61024489e436671e47ec5da8",
+    "title": "Données locales de consommation de produits pétroliers - DROM (à partir de 2011)"
+  },
+  {
+    "id": "682c33e7d455a8571c7d00ff",
+    "title": "Parc de véhicules routiers"
+  },
+  {
+    "id": "6622107a0a16ec992700eab5",
+    "title": "Production et traitement des déchets"
+  },
+  {
+    "id": "62b2c411ed00fe7b9195e145",
+    "title": "Gaz à effet de serre et polluants atmosphériques au format AEA (ex NAMEA) "
+  },
+  {
+    "id": "6870fd6046d2f7597817b8fe",
+    "title": "Maritime: transport de marchandises"
+  },
+  {
+    "id": "686790f156912d386b95d52e",
+    "title": "Exposition des logements et des individus au risque d'inondation par submersion marine"
+  },
+  {
+    "id": "68678efa1da66b014917b8fe",
+    "title": "Exposition des logements et des individus au risque d'inondation par débordement de cours d'eau"
+  },
+  {
+    "id": "68678c4364290d2dd795d52e",
+    "title": "Exposition des maisons individuelles au phénomène de retrait-gonflement des argiles (RGA)"
+  },
+  {
+    "id": "683d7766e2ff66a027f3b693",
+    "title": "Achats de produits phytosanitaires estimés à l'échelle de la commune"
+  },
+  {
+    "id": "64394162329d458db52e7189",
+    "title": "Achats de produits phytosanitaires à l'échelle du code postal "
+  },
+  {
+    "id": "64394106723e32063d3a165a",
+    "title": "Achats et ventes de produits phytosanitaires à l'échelle départementale"
+  },
+  {
+    "id": "66684be91c2b28d362ecbf4f",
+    "title": "Fluvial : transport de marchandises"
+  },
+  {
+    "id": "682c30aad455a8571c7d00fe",
+    "title": "Immatriculations de véhicules routiers"
+  },
+  {
+    "id": "649bf6dbea4a7593d724e365",
+    "title": "Certificats d'Economie d'Energie - EPCI"
+  },
+  {
+    "id": "649bf583ea4a7593d724e364",
+    "title": "Certificats d'Economie d'Energie - Départements"
+  },
+  {
+    "id": "632956d8eae137714f60ae22",
+    "title": "Indicateurs territoriaux de développement durable (ITDD)"
+  },
+  {
+    "id": "63b8281ec113d45936722df2",
+    "title": "Données détaillées du prix des terrains et du bâti"
+  },
+  {
+    "id": "677d45b0359a5cbb32fc907c",
+    "title": "Rail : transport de marchandises"
+  },
+  {
+    "id": "6390f7cb84f0679b04942fc2",
+    "title": "Données détaillées au logement du répertoire des logements locatifs des bailleurs sociaux (RPLS)"
+  },
+  {
+    "id": "62792fb07ca0d5368edf67a3",
+    "title": "Qualité de l'air extérieur : indicateurs nationaux"
+  },
+  {
+    "id": "62792fb27ca0d5368edf67a4",
+    "title": "Qualité de l'air extérieur : indicateurs territoriaux"
+  },
+  {
+    "id": "6102495797d92922a8ce2d70",
+    "title": "Données locales de consommation d'électricité, de gaz naturel et de chaleur et de froid (période 2008-2017)"
+  },
+  {
+    "id": "645114943d964b9b210dd093",
+    "title": "Données sur le parc de véhicules au niveau régional"
+  },
+  {
+    "id": "64511438f3196b5b550dd093",
+    "title": "Données sur le parc de véhicules au niveau communal"
+  }
+]
