@@ -1,0 +1,51 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block page_title %}Créer une liste{% endblock %}
+{% block content %}
+<section>
+    <div class="container roomy-100">
+        <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
+            <h4>Créer une nouvelle liste</h4>
+        </div>
+        <form action="{%url 'nouvelleListe'%}" method="post"
+              class="col-md-8 col-md-offset-2 pricing_item m-top-30 p-top-20 p-bottom-20">
+            {% csrf_token %}
+            <div class="form-group">
+                <p class="col-md-4">
+                    Nom de la liste : {{form.nom}}
+                </p>
+                <p class="col-md-4">
+                    Couleur politique : {{form.couleur}}
+                </p>
+                <p class="col-md-4">
+                    Tête de liste : {{form.teteDeListe}}
+                </p>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    ville : {{form.ville}}
+                    {{form.media}}
+                </div>
+                <div class="col-md-6">
+                    Twitter : {{form.twitter}}
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="col-md-6">
+                    Présentation : {{form.presentation}}
+                </p>
+                <p class="col-md-6">
+                    Site Web de la liste : {{form.site}}
+                </p>
+            </div>
+            <div class="col-md-12 text-center">
+                <p>La liste sera visible sous peu, à la suite de la validation par les administrateurs.</p>
+            </div>
+            <div class="col-md-12 text-center m-top-20">
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+{% endblock %}

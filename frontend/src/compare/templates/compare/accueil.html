@@ -1,0 +1,488 @@
+{% extends "users/baseAccueil.html" %}
+{% load static %}
+{% block content %}
+<section id="hello" class="home bg-mega">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_home">
+                <div>
+                    <div class="col-md-6 m-top-10">
+                        <h4 class="text-white">Programmes-Municipales.fr permet de comparer les programmes
+                            des
+                            listes candidates aux élections municipales.</h4>
+                    </div>
+                    <form class="col-md-6" action="{%url 'accueil'%}" method="post">
+                        <h1 class="text-white">Qui sera mon Maire ? <br/></h1>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{formV.ville}}
+                            {{formV.media}}
+                        </div>
+                        <button type="submit" class="pull-right btn btn-primary">Recherche</button>
+                    </form>
+                </div>
+            </div>
+            <div class="main_home_values">
+                <div class="col-md-4">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="rondP fa fa-angellist"></i>
+                            </div>
+                            <h5 class="m-top-20 text-white"><b>Simple</b></h5>
+                        </div>
+                        <h5 class="m-top-20 text-white">Toutes les listes candidates répondent aux mêmes sujets</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="fa fa-map-marker rondP"></i>
+                            </div>
+                            <h5 class="m-top-20 text-white"><b>Local</b></h5>
+                        </div>
+                        <h5 class="m-top-20 text-white">Pour chaque ville, toutes les listes sont référencées</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="fa fa-balance-scale rondP"></i>
+                            </div>
+                            <h5 class="m-top-20 text-white"><b>Transparent</b></h5>
+                        </div>
+                        <h5 class="m-top-20 text-white">Les propositions sont rédigées directement à partir des
+                            programmes</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="main_home_values">
+                <h5 class="text-white">Découvrir les dernières villes mises à jour :</h5>
+                {% for b in best%}
+                <div class="col-md-3 m-bottom-20">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title right">{{b.nom|truncatechars:20}}</h5>
+                            <p class="card-text col-md-6"><small>{{b.nbL}} listes candidates</small></p>
+                            <a href="/{{b.url}}" class="btn btn-primary col-md-6">Voir !</a>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div><!--End off row-->
+    </div>
+</section> <!--End off Home Sections-->
+
+<!--Portfolio Section-->
+<section id="info" class="portfolio">
+    <div class="container roomy-50">
+        <div class="row">
+            <div class="main_portfolio">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="text-center ">
+                        <h2>Quelques infos sur les élections municipales 2020</h2>
+                        <div class="separator_auto"></div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Calendar.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center ">
+                                <p class="in-img-center text-white text-uppercase"><b>Rendez-vous en Mars !<br/>
+                                    1er tour : 15 Mars 2020<br/>
+                                    2ème tour : 22 mars 2020</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Vote.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>Avoir 18 ans<br/>
+                                    Être Français ou Européen<br/>
+                                    Être inscrit sur les listes électorales</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Second.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>Les listes qui dépassent 10 %
+                                    passent au 2nd tour<br/>Les listes entre 5 et 10 % peuvent fusionner</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Liste.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>On vote pour élire les Conseillers
+                                    Municipaux<br/>Les Conseillers Municipaux élisent le/la Maire
+                                    <br/>Ils sont élus pour 6 ans
+                                </b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-top-30">
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Gender.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>1 Maire sur 6 est une femme<br/>
+                                    Et ce chiffre a pourtant triplé en 30 ans<br/>16 % aujourd'hui, contre 5.5 % en 1989
+                                </b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Cake.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>Les Maires ont 62 ans en moyenne
+                                    <br/>Et le doyen des maires a fêté ses 97 ans cette année
+                                </b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Chair.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>1 Maire sur 3 est retraité
+                                    <br/>Et les Maires en activité sont principalement agriculteurs</b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <div class="portfolio_item portfolio_item2">
+                            <img src="{% static '/images/home/Michel.jpg' %}" alt=""/>
+                            <div class="portfolio_hover text-center">
+                                <p class="in-img-center text-white text-uppercase"><b>C'est Michel !<br/>
+                                    1 maire sur 25 s'appelle Michel</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End off row -->
+        <!--<div class="row">
+            <div class="about_bottom_content">
+                <div class="col-md-3">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="rondP fa fa-calendar-check-o"></i>
+                            </div>
+                            <h6 class="m-top-20">Une élection en deux tours</h6>
+                        </div>
+                        <p class="m-top-20">1er tour : 15 mars 2020 <br/> 2ème tour : 22 mars 2020</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="fa fa-universal-access rondP"></i>
+                            </div>
+                            <h6 class="m-top-20">Pour voter,</h6>
+                        </div>
+                        <p class="m-top-20">il suffit d'avoir au moins 18 ans et être inscrit sur les listes
+                            électorales de sa ville</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="fa fa-percent rondP"></i>
+                            </div>
+                            <h6 class="m-top-20">Les listes qui ont plus de 10% des voix</h6>
+                        </div>
+                        <p class="m-top-20">peuvent se maintenir pour le second tour</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="about_bottom_item m-top-20">
+                        <div class="ab_head">
+                            <div class="ab_head_icon">
+                                <i class="fa fa-users rondP"></i>
+                            </div>
+                            <h6 class="m-top-20">On vote pour une liste !</h6>
+                        </div>
+                        <p class="m-top-20">Le maire est désigné par les conseillers municupaux</p>
+                    </div>
+                </div>
+            </div>
+        </div>&lt;!&ndash;End off row&ndash;&gt;-->
+    </div><!--End off container -->
+</section><!-- End off Portfolio section-->
+
+<!--About Sections-->
+<section id="nous" class="about roomy-100 bg-grey">
+    <div class="container">
+        <div class="row">
+            <div class="main_about">
+                <div class="col-md-6 separator_vertical">
+                    <div class="about_content">
+                        <h2>Qui sommes nous ?</h2>
+                        <div class="separator_left"></div>
+                        <h5><i class="fa fa-caret-right text-primary"></i> Un comparateur transparent
+                        </h5>
+                        <p>Programmes-Municipales.fr est un comparateur de programmes. Ici, pas de quizz avec un
+                            taux de compatibilité pour savoir quelle liste voter : les propositions des listes
+                            candidates sont organisées de façon claire et c’est à vous de choisir.
+                        </p>
+                        <h5><i class="fa fa-caret-right text-primary"></i> Un comparateur apartisan
+                        </h5>
+                        <p>Nous ne sommes liés à aucune organisation politique / aucun parti et les listes sont
+                            présentées dans un ordre aléatoire.
+                        </p>
+                        <h5><i class="fa fa-caret-right text-primary"></i> Un comparateur en avance</h5>
+                        <p>Les programmes des listes candidates arriveront quelques jours seulement avant les
+                            élections dans nos boîtes aux lettres. Programmes-Municipales.fr propose de diffuser ces
+                            programmes sans attendre.
+                        </p>
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary text-center" data-toggle="modal" data-target="#charte">
+                                Notre Charte d'Indépendance
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="about_accordion wow fadeIn">
+                        <h5>Comment fonctionne Programmes-Municipales.fr ?</h5>
+                        <p>
+                            Des propositions organisées en 5 catégories.<br/>
+                            Chaque catégorie comporte plusieurs sujets, propres ou non à la ville, sur lesquels les
+                            listes candidates indiquent leurs propositions
+                        </p>
+                        <div id="faq_main_content" class="faq_main_content">
+                            {% for c in cs%}
+                            <h6><i class="fa fa-angle-right"></i>{{c.titre}}</h6>
+                            <div>
+                                <div class="content">
+                                    <ul>
+                                        {% for cri in c.criteres%}
+                                        <li><i class="fa fa-angle-right text-primary"></i> {{cri.titre}}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div> <!-- End off accordion item-1 -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End off row-->
+    </div><!--End off container -->
+</section> <!--End off About section -->
+
+<!--
+<section id="VerifierMonInscription" class="bg-mega roomy-80">
+    <div class="container">
+        <div class="row">
+            <div class="skill_bottom_content col-md-7 col-sd-12">
+                <div>
+                    <div class="skill_bottom_item">
+                        <h3 class="text-white"><span class="fontgros statistic-counter"><b>{{verif}}</b></span> jours
+                            avant la
+                            fin des
+                            inscriptions sur les listes électorales</h3>
+                    </div>
+                </div>
+                <div class="separator_small"></div>
+                <div>
+                    <div class="skill_bottom_item">
+                        <h3 class="text-white"><span class="fontgros statistic-counter"><b>{{premier}}</b></span> jours
+                            avant le
+                            premier
+                            tour !</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="skill_bottom_content col-md-3 col-sd-12">
+                <a href="https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE"
+                   target="_blank">
+                    <div class="pricing_price_border text-center">
+                        <div class="pricing_price">
+                            <h4 class="text-white">Vérifier</h4>
+                            <h6 class="text-white">son inscription !</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+-->
+
+<section id="aide" class="about roomy-40 bg-white">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">Comment contribuer à référencer plus de villes ?</h3>
+            <div class="separator_auto"></div>
+            <div class="col-md-6 m-top-10">
+                <div class="">
+                    <h4 class="m-top-30 service_item"><i class="icofont icofont-light-bulb"></i>
+                        Référencer les programmes des listes
+                    </h4>
+                    <div class="separator_small"></div>
+                    <ul class="fontgros">
+                        <li><i class="fa fa-caret-right text-primary"></i>
+                            <b>Référencer les listes candidates</b> à partir d’articles de la presse régionale, ou en
+                            tapant «Élections municipales 2020 Wikipédia + Nom de la Ville »
+                        </li>
+                        <li><i class="fa fa-caret-right text-primary"></i> <b>Référencer les grandes mesures des
+                            programmes</b> à partir des sites internet des listes candidates, de leur compte
+                            Facebook/Twitter
+                        </li>
+                        <li><i class="fa fa-caret-right text-primary"></i>
+                            <b>Contacter les listes</b> pour les inviter à vérifier/compléter leurs grandes mesures à
+                            partir du mail type disponible <a
+                                    href="https://docs.google.com/document/d/1ivGtlMybkPPeMirmDGrBR1zrzMwhMhvXabI-YbKM5m4/edit"
+                                    target="_blank">ici.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 m-top-10">
+                <div>
+                    <h4 class="m-top-30 service_item"><i class="fa fa-angellist"></i> Comment ça marche ? </h4>
+                    <div class="separator_small"></div>
+                    <ul class="fontgros">
+                        <li><i class="fa fa-caret-right text-primary"></i><a
+                                href="https://programmes-municipales.fr/connect"> Créer son compte</a>, qui vous
+                            permettra de revenir plus tard compléter ou modifier la/les liste(s) créée(s).
+                        </li>
+                        <li><i class="fa fa-caret-right text-primary"></i>
+                            Une fois connecté, en haut à droite de l’écran, <b>cliquer sur “Créer/modifier une
+                                liste”</b>
+                        </li>
+                        <li><i class="fa fa-caret-right text-primary"></i>
+                            <b>Un petit tuto ?</b> En cas de difficulté, une page d’aide est disponible
+                            <a href="https://drive.google.com/file/d/1tRDxG-jRFf6ZZkUbgYzBcH1FsQXNRBDL/view"
+                               target="_blank">ici.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--End off row-->
+        </div><!--End off container -->
+        <p class="m-top-40 fontgros text-center"><i class="fa fa-caret-right text-primary"></i> Si des informations sont
+            plus difficiles
+            à trouver, pas de soucis, on préfère un tableau à
+            moitié rempli qu'un tableau vide !
+        </p>
+        <h4 class="text-center col m-top-20">Merci !</h4>
+    </div>
+</section>
+
+<!--Subscribe Us Section-->
+<section id="subscribe" class="contact bg-mega fix roomy-100"><!-- class subscribe avec photo -->
+    <div class="container">
+        <div class="row">
+            <div class="main_contact text-white">
+                <div class="col-md-5">
+                    <div class="rage_widget">
+                        <div class="widget_head">
+                            <h3 class="text-white">Nous contacter</h3>
+                            <div class="separator_small"></div>
+                        </div>
+                        <ul>
+                            <li><i class="fa fa-caret-right "></i>
+                                Rester informé des aventures de Programmes-Municipales.fr
+                            </li>
+                            <li><i class="fa fa-caret-right "></i>
+                                Suivre les prochaines listes qui vont se déclarer dans une ville
+                            </li>
+                            <li><i class="fa fa-caret-right "></i>
+                                Proposer une amélioration / Signaler un bug sur le site
+                            </li>
+                            <li><i class="fa fa-caret-right "></i>
+                                Proposer un coup de main pour nous aider
+                            </li>
+                            <li><i class="fa fa-caret-right "></i>
+                                Signaler une liste manquante
+                            </li>
+                            <li><i class="fa fa-caret-right "></i>
+                                Ajouter un critère local
+                            </li>
+                        </ul>
+                        <br/>
+                        <h5 class="text-white"><b>Nous sommes à l'écoute !</b></h5>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <form class="" action="{% url 'accueil' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group">
+                                {{formC.email}}
+                            </div>
+                            <div class="form-group">
+                                {{formC.comment}}
+                            </div>
+                            <div class="form-group">
+                                {{formC.inform.label_tag}} {{formC.inform}}
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary" name="contact">Envoyer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!--End off row -->
+    </div><!--End off container -->
+</section><!--End off Subscribe Section-->
+
+<!-- scroll up-->
+<div class="scrollup">
+    <a href="#"><i class="fa fa-chevron-up"></i></a>
+</div><!-- End off scroll up -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">C'est dans la boîte !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Votre adresse mail a bien été enregistrée !
+                Et si vous nous avez écrit un message, nous vous répondrons rapidement.
+
+                Pour nous aider à comparer plus de villes, <a href="/#aide">rendez-vous ici</a>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%if modal%}
+<script>
+    $(document).ready(function(){
+    $('#exampleModalCenter').appendTo("body")
+    $("#exampleModalCenter").modal('show');
+    });
+
+</script>
+{%endif%}
+{% endblock content %}
+

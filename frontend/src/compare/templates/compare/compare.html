@@ -1,0 +1,283 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block page_title %}Comparer les listes à {{v.nom}}{% endblock %}
+{% block metaDesc %}Comparer les listes candidates à l'élection municipales à {{v.nom}}{% endblock %}
+{% block content %}
+<section class="about roomy-40">
+    {%if iframe is None or iframe is True%}
+    <div class="container_compare">
+        {%endif%}
+        <div class="row">
+            <div class="col-md-12">
+                {%if iframe is None or iframe is True%}
+                <h5><i class="fa fa-angle-left"></i> <a href="/{{v.url}}">{{v.nom}}</a></h5>
+                {%endif%}
+                <div class="head_title text-center">
+                    <h2>Comparer les listes candidates à {{v.nom}}</h2>
+                    <div class="separator_auto"></div>
+                    <!--                        <p>Description de la ville, et de ses enjeux : {% for c in v.criteres.all%}{{c.titre}},
+                                                {%endfor %}...</p>-->
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="about_accordion wow fadeIn">
+                    <div id="faq_main_content" class="faq_main_content">
+                        <h6><i class="fa fa-star text-primary"></i>Cartes d'identité</h6>
+                        <div>
+                            <div class="content">
+                                <div class="table-responsive compare">
+                                    <table class="table table-bordered table-striped" style="table-layout: fixed;">
+                                        <thead>
+                                        <tr>
+                                            {% for l in ls%}
+                                            <th scope="col" name="{{l.id}}">
+                                                <button type="button" class="closepetit close" aria-label="Close"
+                                                        name="{{l.id}}"><small>Ne pas comparer cette liste</small>
+                                                    <span aria-hidden="true" class="closeGros">x</span>
+                                                </button>
+                                            </th>
+                                            {% endfor %}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="{{ls|length}}"><strong>Nom de la liste et couleur
+                                                politique</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {% for l in ls%}
+                                            <td name="{{l.id}}">
+                                                {%if l.nom is not None%}
+                                                {{l.nom}} -
+                                                {% endif %}
+                                                {{l.couleur}}
+                                                <br/>
+                                                {%if l.estRejoint|length > 0%}
+                                                <strong class="fusionListe">
+                                                    Rejoint par
+                                                    {% for r in l.estRejoint%}
+                                                    {{r.teteDeListe}} ({{r.couleur}})
+                                                    {% endfor %}
+                                                </strong>
+                                                {% endif %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            <td colspan="{{ls|length}}"><strong>Tête de liste</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {% for l in ls%}
+                                            <td name="{{l.id}}">
+                                                <div class="image_ville">
+                                                    {%if l.lienPhoto is not None%}
+                                                    <img class="image_ville_item" src="{{l.lienPhoto}}"
+                                                         onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                         alt=""/>
+                                                    {%elif l.photo.url is not None%}
+                                                    <img class="image_ville_item" src="{{l.photo.url}}"
+                                                         onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                         alt=""/>
+                                                    {% else %}
+                                                    <img class="image_ville_item"
+                                                         src="{% static '/images/teamwork.png' %}" alt=""/>
+                                                    {% endif %}
+                                                </div>
+                                                {{l.teteDeListe}}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            <td colspan="{{ls|length}}"><strong>Chartes signées</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {% for l in ls%}
+                                            <td name="{{l.id}}">
+                                                {% for charte in l.chartes.all%}
+                                                <div class="col-md-4">
+                                                    <div class="image_charte_ville">
+                                                        <a {%if charte.site is not None%}href="{{charte.site}}"
+                                                           target="_blank" {% endif %}
+                                                           {%if charte.site is not None%}{% endif %}
+                                                           tabindex="0"
+                                                           role="button"
+                                                           style="cursor: pointer;"
+                                                           data-toggle="popover"
+                                                           data-placement="auto"
+                                                           data-trigger="hover"
+                                                           data-html="true"
+                                                           title="{{charte.titre}}"
+                                                           data-content="{{charte.description}}">
+                                                            {%if charte.photo.url is not None%}
+                                                            <img class="image_ville_item" src="{{charte.photo.url}}"
+                                                                 alt=""/>
+                                                            {%elif charte.lienPhoto is not None%}
+                                                            <img class="image_ville_item" src="{{charte.lienPhoto}}"
+                                                                 onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                                 alt=""/>
+                                                            {% else %}
+                                                            <img class="image_ville_item"
+                                                                 src="{% static '/images/teamwork.png' %}" alt=""/>
+                                                            {% endif %}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                        <tr>
+                                            <td colspan="{{ls|length}}"><strong>Découvrez les priorités des
+                                                listes</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {% for l in ls%}
+                                            <td name="{{l.id}}"
+                                                style="white-space: normal !important;word-wrap: break-word;">
+                                                {% for pr in l.prio%}
+                                                <div class="bull" role="alert">{{pr.critere.titre}} :
+                                                    {% if pr.titre|length < 200 %}
+                                                    {{pr.titre}}
+                                                    {% else %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus"
+                                                       data-content="{{pr.titre}}">{{pr.titre|truncatechars:60}}</a>
+                                                    {% endif %}
+                                                </div>
+                                                {% endfor %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- End off accordion item-1 -->
+                        {% for cat in cats%}
+                        <h6><i class="fa fa-angle-right"></i>{{cat.titre}}</h6>
+                        <div>
+                            <div class="content">
+                                <div class="table-responsive compare">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr class="sticky table-bordered">
+                                            {% for l in ls%}
+                                            <th scope="col" name="{{l.id}}">
+                                                <a href="liste/{{l.id}}"
+                                                   tabindex="0"
+                                                   role="button"
+                                                   style="cursor: pointer;"
+                                                   data-toggle="popover"
+                                                   data-placement="auto"
+                                                   data-trigger="hover"
+                                                   data-html="true"
+                                                   title="{%if l.nom is not None%}
+                                                                        {{l.nom}}
+                                                                        {% else %}
+                                                                        Liste {{l.couleur}}
+                                                                        {% endif %}"
+                                                   data-content="
+                                                               {%if l.teteDeListe is not None%}
+                                                              <h5>Tête de liste : {{l.teteDeListe}}</h5>
+                                                              {% endif %}
+                                                              <p>
+                                                              {%if l.couleur is not None%}
+                                                              Couleur politique : {{l.couleur}}<br/>
+                                                              {% endif %}
+                                                              {%if l.presentation is not None%}
+                                                              {{l.presentation}}
+                                                              {% endif %}</p>">
+                                                    <div class="image_ville">
+                                                        {%if l.lienPhoto is not None%}
+                                                        <img class="image_ville_item" src="{{l.lienPhoto}}"
+                                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                             alt=""/>
+                                                        {%elif l.photo.url is not None%}
+                                                        <img class="image_ville_item" src="{{l.photo.url}}"
+                                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                             alt=""/>
+                                                        {% else %}
+                                                        <img class="image_ville_item"
+                                                             src="{% static '/images/teamwork.png' %}" alt=""/>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        {%if l.nom is not None%}
+                                                        {{l.nom}} -
+                                                        {% endif %}
+                                                        {{l.couleur|truncatechars:20}}
+                                                    </div>
+                                                </a>
+                                                <button type="button" class="close closegros col-md-2"
+                                                        aria-label="Close"
+                                                        name="{{l.id}}">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </th>
+                                            {% endfor %}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for c in cat.cs%}
+                                        <tr>
+                                            <td colspan="{{ls|length}}"><strong>{{c.titre}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            {% for l in c.listes%}
+                                            <td name="{{l.id}}">
+                                                {% for prop in l.ps%}
+                                                {% if prop.titre != "" %}
+                                                <div class="bull" role="alert">
+                                                    {% if prop.description == "" or prop.description is None %}
+                                                    {% if prop.titre|length < 60 %}
+                                                    {{prop.titre}}
+                                                    {% else %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus"
+                                                       data-content="{{prop.titre}}">{{prop.titre|truncatechars:60}}</a>
+                                                    {% endif %}
+                                                    {% else %}
+                                                    {% if prop.titre|length < 60 %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus"
+                                                       data-content="{{prop.description}}">{{prop.titre}}</a>
+                                                    {% else %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus" title={{prop.titre}}
+                                                       data-content="{{prop.description}}">{{prop.titre|truncatechars:60}}</a>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    {% if prop.estUnePriorite %} <i class="fa fa-star text-white"></i>{%endif%}
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> <!-- End off accordion item-1 -->
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div><!--End off row-->
+        {%if iframe is None or iframe is True%}
+    </div><!--End off container -->
+    {%endif%}
+</section> <!--End off About section -->
+{% endblock content %}

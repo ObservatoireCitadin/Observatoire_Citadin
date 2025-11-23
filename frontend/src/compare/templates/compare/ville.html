@@ -1,0 +1,427 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block page_title %}{{v.nom}}{% endblock %}
+{% block metaDesc %}Découvrez quelles sont les listes candidates dans la ville de {{v.nom}}.{% endblock %}
+{% block content %}
+<!--Home page style-->
+<section id="pricing" class="pricing lightbg">
+    <div class="container">
+        {% if ls|length == 0 %}
+        <div class="main_pricing roomy-150 text-center">
+            <div class="col-md-8 col-sm-12 text-center">
+                <h1>{{v.nom}}</h1>
+                <div class="separator_auto"></div>
+                <p>{%if v.description is not None%}{{v.description}}{% endif %}</p>
+                <h4>Nous n'avons pas encore référencé les listes candidates dans cette ville.</h4>
+                <h5>Pour recevoir un mail unique lorsque cette ville sera prête :</h5>
+                <form class="" action="{% url 'ville' v.url %}" method="post">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-4">{{formI.email}}</div>
+                        <div class="col-md-2">
+                            {% csrf_token %}
+                            <button type="submit" name="formI" class="btn btn-primary">Je reste informé !
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <!--                    <h5>Pour nous aider à référencer les listes de cette ville : cliquer ici</h5>-->
+            </div>
+            {%if v.departement is not None or v.population is not None or v.nomMaire is not None %}
+            <div class="col-md-4 col-sm-12 m-top-30 bg-white pricing_item">
+                <div class="p-top-20 p-bottom-15">
+                    <h5>{%if v.departement is not None%}{{v.departement}}{% endif %}
+                        {%if v.departement is not None and v.population is not None%} - {% endif %}
+                        {%if v.population is not None%}{{v.population}} habitants{% endif %}
+                    </h5>
+                    {%if v.nomMaire is not None%}
+                    <h5>Maire sortant :</h5>
+                    <h6>{%if v.prenomMaire is not None%}{{v.prenomMaire}} {% endif %}{{v.nomMaire}}</h6>
+                    {% endif %}
+                    {%if v.professionMaire is not None%}
+                    <h6>{{v.professionMaire}}</h6>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+        <form class="main_pricing roomy-50" action="{% url 'ville' v.url %}" method="post">
+            <div class="row m-bottom-30">
+                <div class="col-md-8 col-sm-12">
+                    <div class=" text-center">
+                        {% csrf_token %}
+                        <h1>{{v.nom}}</h1>
+                        <div class="separator_auto"></div>
+                        <p>{%if v.description is not None%}{{v.description}}{% endif %}</p>
+                        <button type="submit" name="formC" class="btn btn-primary">Comparer les programmes</button>
+                        <button type="button" name="follow" class="btn btn-info" data-toggle="modal"
+                                data-target="#follow" title="Suivre les actualités de {{v.nom}}">
+                            <i class="fa fa-bell"></i>
+                        </button>
+                        <button type="button" name="signaler" class="btn btn-warning" data-toggle="modal"
+                                data-target="#signaler" title="Signaler une anomalie">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 m-top-30 bg-white pricing_item">
+                    <div class="p-top-20 p-bottom-15">
+                        <h5>{%if v.departement is not None%}{{v.departement}}{% endif %}
+                            {%if v.departement is not None and v.population is not None%} - {% endif %}
+                            {%if v.population is not None%}{{v.population}} habitants{% endif %}
+                        </h5>
+                        {%if v.nomMaire is not None%}
+                        <h5>Sortant : {%if v.prenomMaire is not None%}{{v.prenomMaire}} {% endif %}{{v.nomMaire}}</h5>
+                        {% endif %}
+                        {%if v.professionMaire is not None%}
+                        <h6>{{v.professionMaire}}</h6>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if secondTour %}
+            <h3>Listes maintenues pour le second tour : </h3>
+            {% endif%}
+            {% if elu %}
+            <h3>Liste élue :</h3>
+            {% endif%}
+            <div class="row">
+                {% for l in ls%}
+                <div class="col-md-4 col-sm-12 m-bottom-30">
+                    <div class="pricing_item">
+                        <div class="pricing_head text-center p-top-10 p-bottom-15">
+                            <h4 class="text-uppercase">
+                                {%if l.nom is not None%}
+                                {{l.nom}}
+                                {% else %}
+                                Liste {{l.couleur}}
+                                {% endif %}
+                                {%if l.modif%}
+                                <small><a href="/edit/{{l.id}}"><i class="fa fa-pencil"></i></a></small>
+                                {% endif %}
+                            </h4>
+                            {%if l.estRejoint|length > 0%}
+                            <strong class="fusionListe">Rejoint par
+                                {% for r in l.estRejoint%}
+                                {{r.teteDeListe}} ({{r.couleur}})
+                                {% endfor %}
+                            </strong>
+                            {% endif %}
+                        </div>
+                        <div class="pricing_body bg-white p-top-20 p-bottom-20">
+                            <h5 class="text-center pricing_tete col-md-9">
+                                {%if l.teteDeListe is not None%}
+                                Tête de liste : {{l.teteDeListe}}
+                                {% endif %}
+                            </h5>
+                            <span class="text-center score_ville col-md-3">
+                            {%if l.score is not None%}
+                            <strong>{{l.score}}%</strong>
+                            {% endif %}
+                        </span>
+                            <div class="col-md-7">
+                                {%if l.couleur is not None%}
+                                <h6><em>Couleur politique : {{l.couleur}}</em></h6>
+                                {% endif %}
+                                <small>
+                                    {% for p in l.prio%}
+                                    <li>{{p.critere.titre|truncatechars:25}} : {{p.titre|truncatechars:40}}</li>
+                                    {% endfor %}
+                                </small>
+                            </div>
+                            <div class="col-md-5 text-center">
+                                <div class="image_ville">
+                                    <a href="/liste/{{l.id}}">
+                                        {%if l.lienPhoto is not None%}
+                                        <img class="image_ville_item" src="{{l.lienPhoto}}"
+                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                             alt=""/>
+                                        {%elif l.photo.url is not None%}
+                                        <img class="image_ville_item" src="{{l.photo.url}}"
+                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                             alt=""/>
+                                        {% else %}
+                                        <img class="image_ville_item" src="{% static '/images/teamwork.png' %}" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    {% for charte in l.chartes.all%}
+                                    <div class="col-md-3 m-top-5">
+                                        <div class="image_charte_ville">
+                                            <a {%if charte.site is not None%}href="{{charte.site}}"
+                                               target="_blank" {% endif %}
+                                               {%if charte.site is not None%}{% endif %}
+                                               tabindex="0"
+                                               role="button"
+                                               style="cursor: pointer;"
+                                               data-toggle="popover"
+                                               data-placement="auto"
+                                               data-trigger="hover"
+                                               data-html="true"
+                                               title="{{charte.titre}}"
+                                               data-content="{{charte.description}}">
+                                                {%if charte.photo.url is not None%}
+                                                <img class="image_ville_item" src="{{charte.photo.url}}" alt=""/>
+                                                {%elif charte.lienPhoto is not None%}
+                                                <img class="image_ville_item" src="{{charte.lienPhoto}}"
+                                                     onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                     alt=""/>
+                                                {% else %}
+                                                <img class="image_ville_item" src="{% static '/images/teamwork.png' %}"
+                                                     alt=""/>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="pricing_btn text-center p-top-10">
+                                    <label class="form-check-label" for="{{l.id}}">
+                                        Comparer
+                                    </label>
+                                    <input checked type="checkbox" name="Listes"
+                                           value="{{l.id}}" id="{{l.id}}" style="margin-right: 10%;">
+                                    <a href="/liste/{{l.id}}" class="btn btn-primary">Voir !</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End off col-md-4 -->
+                {% endfor %}
+            </div>
+            {% if secondTour %}
+            <h3>Listes non maintenues pour le second tour : </h3>
+            {% endif %}
+            {% if elu %}
+            <h3>Listes candidates non élues : </h3>
+            {% endif%}
+            <div class="row">
+                {% for l in lsnm%}
+                <div class="col-md-4 col-sm-12 m-bottom-30">
+                    <div class="pricing_item">
+                        <div class="pricing_head text-center p-top-20 p-bottom-15">
+                            <h4 class="text-uppercase">
+                                {%if l.nom is not None%}
+                                {{l.nom}}
+                                {% else %}
+                                Liste {{l.couleur}}
+                                {% endif %}
+                                {%if l.modif%}
+                                <small><a href="/edit/{{l.id}}"><i class="fa fa-pencil"></i></a></small>
+                                {% endif %}
+                            </h4>
+                            {%if l.fusionAvec is not None%}
+                            <strong class="fusionListe">Fusion avec {{l.fusionAvec.teteDeListe}} ({{l.fusionAvec.couleur}})</strong>
+                            {% endif %}
+                        </div>
+                        <div class="pricing_body bg-white p-top-20 p-bottom-20">
+                            <h5 class="text-center pricing_tete col-md-9">
+                                {%if l.teteDeListe is not None%}
+                                Tête de liste : {{l.teteDeListe}}
+                                {% endif %}
+                            </h5>
+                            <span class="text-center score_ville col-md-3">
+                            {%if l.score is not None%}
+                            <strong>{{l.score}}%</strong>
+                            {% endif %}
+                        </span>
+                            <div class="col-md-7">
+                                {%if l.couleur is not None%}
+                                <h6><em>Couleur politique : {{l.couleur}}</em></h6>
+                                {% endif %}
+                                <p>
+                                    {%if l.slogan is not None%}
+                                    {{l.slogan}}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="col-md-5 text-center">
+                                <div class="image_ville">
+                                    <a href="/liste/{{l.id}}">
+                                        {%if l.lienPhoto is not None%}
+                                        <img class="image_ville_item" src="{{l.lienPhoto}}"
+                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                             alt=""/>
+                                        {%elif l.photo.url is not None%}
+                                        <img class="image_ville_item" src="{{l.photo.url}}"
+                                             onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                             alt=""/>
+                                        {% else %}
+                                        <img class="image_ville_item" src="{% static '/images/teamwork.png' %}" alt=""/>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="row">
+                                    {% for charte in l.chartes.all%}
+                                    <div class="col-md-3 m-top-5">
+                                        <div class="image_charte_ville">
+                                            <a {%if charte.site is not None%}href="{{charte.site}}"
+                                               target="_blank" {% endif %}
+                                               {%if charte.site is not None%}{% endif %}
+                                               tabindex="0"
+                                               role="button"
+                                               style="cursor: pointer;"
+                                               data-toggle="popover"
+                                               data-placement="auto"
+                                               data-trigger="hover"
+                                               data-html="true"
+                                               title="{{charte.titre}}"
+                                               data-content="{{charte.description}}">
+                                                {%if charte.photo.url is not None%}
+                                                <img class="image_ville_item" src="{{charte.photo.url}}" alt=""/>
+                                                {%elif charte.lienPhoto is not None%}
+                                                <img class="image_ville_item" src="{{charte.lienPhoto}}"
+                                                     onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                                     alt=""/>
+                                                {% else %}
+                                                <img class="image_ville_item" src="{% static '/images/teamwork.png' %}"
+                                                     alt=""/>
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="pricing_btn text-center p-top-10">
+                                    <label class="form-check-label" for="{{l.id}}">
+                                        Comparer
+                                    </label>
+                                    <input type="checkbox" name="Listes"
+                                           value="{{l.id}}" id="{{l.id}}" style="margin-right: 10%;">
+                                    <a href="/liste/{{l.id}}" class="btn btn-primary">Voir !</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End off col-md-4 -->
+                {% endfor %}
+            </div>
+            <!--<h5 class="col-md-12 m-top-30">*L'ordre de présentation des listes est aléatoire</h5>-->
+        </form>
+        {%endif%}
+    </div>
+</section> <!--End off Pricing section -->
+
+<!-- Modal formulaire signalement -->
+<div class="modal fade" id="signaler" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Signaler une anomalie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <form class="modal-body" action="{% url 'ville' v.url %}" method="post">
+                {% csrf_token %}
+                <p>Une erreur est présente dans la description d'une liste ou d'une ville ? N'hésitez pas à nous
+                    remonter l'information ici pour qu'elle soit corrigée au plus vite !</p>
+                <div class="form-group">
+                    Adresse email :
+                    {{formS.email}}
+                </div>
+                <div class="form-group">
+                    {{formS.comment}}
+                </div>
+                <div class="form-group">
+                    {{formS.inform.label_tag}} {{formS.inform}}
+                </div>
+                <button type="submit" name="signaler" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal formulaire abonnement -->
+<div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" action="{% url 'ville' v.url %}" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Pour suivre les actualités de {{v.nom}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                <h6>Adresse email : </h6>
+                {{formR.email}}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="formR" class="btn btn-primary">Je reste informé !</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Validation abonnement ville -->
+<div class="modal fade" id="modalFollow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">C'est dans la boîte !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Votre adresse mail a bien été enregistrée !<br/>
+                Pour nous aider à comparer plus de villes, <a href="/#aide">rendez-vous ici</a>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Validation Signalement -->
+<div class="modal fade" id="modalSignal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Merci pour votre signalement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Nous allons prendre connaissance de votre message et vous répondre au plus vite.
+
+                Pour nous aider à comparer plus de villes, <a href="/#aide">rendez-vous ici</a>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{%if modalFollow%}
+<script>
+    $(document).ready(function(){
+    $('#modalFollow').appendTo("body")
+    $("#modalFollow").modal('show');
+    });
+
+
+</script>
+{%endif%}
+{%if modalSignal%}
+<script>
+    $(document).ready(function(){
+    $('#modalSignal').appendTo("body")
+    $("#modalSignal").modal('show');
+    });
+
+
+</script>
+{%endif%}
+{% endblock %}
