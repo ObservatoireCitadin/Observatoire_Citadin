@@ -4,12 +4,12 @@ Application composée d’un backend API (FastAPI) et d’un frontend analytique
 
 ### Architecture
 - **Backend**: FastAPI (Python), endpoints versionnés sous `/api/v1`.
-- **Frontend**: Streamlit, consomme l’API backend.
+- **Frontend_test**: Streamlit, consomme l’API backend.
 - **ETL**: scripts clients pour Geod’air / Atmo dans `backend/app/etl/`.
 
 Consultez les détails par composant:
 - Backend: `backend/README_BACKEND.md`
-- Frontend: `frontend/README_FRONTEND.md`
+- Frontend_test: `frontend_test/README_FRONTEND.md`
 
 ## Prérequis
 - Python 3.10+ (recommandé)

@@ -31,7 +31,7 @@ def http_get(client: httpx.Client, url: str, params: Optional[Dict[str, Any]] = 
 
 def render_sidebar() -> str:
     st.sidebar.title("Observatoire Citadin")
-    st.sidebar.caption("Frontend Streamlit")
+    st.sidebar.caption("Frontend test Streamlit")
 
     if "backend_url" not in st.session_state:
         st.session_state.backend_url = get_default_backend_url()
