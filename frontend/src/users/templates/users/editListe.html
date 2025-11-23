@@ -1,0 +1,154 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block page_title %}
+{%if l.nom is not None%}
+{{l.nom}}
+{% else %}
+Liste {{l.couleur}}
+{% endif %}{% endblock %}
+{% block content %}
+<section>
+    <div class="container roomy-50">
+        <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
+            <h2>
+                {%if l.nom is not None%}
+                {{l.nom}}
+                {% else %}
+                Liste {{l.couleur}}
+                {% endif %}
+            </h2>
+        </div>
+        <form action="{%url 'editListe' l.id%}" method="post"
+              class="col-md-10 col-md-offset-1 pricing_item m-top-30 p-top-20 p-bottom-20">
+            {% csrf_token %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Tête de liste</th>
+                    <th scope="col">Couleur politique</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="col">
+                        <input style="width:100%" type="text" name="nom"
+                               value="{%if l.nom is not None%}{{l.nom}}{%endif%}">
+                    </td>
+                    <td scope="col">
+                        <input style="width:100%" type="text" name="teteDeListe"
+                               value="{%if l.teteDeListe is not None%}{{l.teteDeListe}}{%endif%}">
+                    </td>
+                    <td scope="col">
+                        <input style="width:100%" type="text" name="couleur"
+                               value="{%if l.couleur is not None%}{{l.couleur}}{%endif%}">
+                    </td>
+                </tr>
+                </tbody>
+                <thead>
+                <tr>
+                    <th scope="col">Site Web</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">twitter</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="col"><input style="width:100%" type="text" name="site"
+                                           value="{%if l.site is not None%}{{l.site}}{%endif%}"></td>
+                    <td scope="col"><input style="width:100%" type="text" name="lienPhoto"
+                                           value="{%if l.lienPhoto is not None%}{{l.lienPhoto}}{%endif%}"></td>
+                    <td scope="col"><input style="width:100%" type="text" name="twitter"
+                                           value="{%if l.twitter is not None%}{{l.twitter}}{%endif%}">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Présentation</th>
+                    <td scope="col" colspan="2"><textarea style="width:100%" rows="2" name="presentation">{%if l.presentation is not None%}{{l.presentation}}{%endif%}</textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary" name="cancel">Annuler</button>
+                <button type="submit" class="btn btn-primary" name="saveandcontinue">Enregistrer et continuer les
+                    modifications
+                </button>
+                <button type="submit" class="btn btn-primary" name="save">Enregistrer</button>
+            </div>
+            <div class="col-md-12 text-center m-top-20">
+                <p>Les priorités de la liste seront mises en avant. Le nombre de priorités est fixé entre 3 et 5.</p>
+            </div>
+            <table class="table">
+                {% for cat in cats%}
+                <thead>
+                <tr>
+                    <th scope="col" colspan="3" class="text-center"><h4>{{cat.titre}}</h4></th>
+                </tr>
+                </thead>
+                <tbody>
+                <thead>
+                <tr>
+                    <th style="width: 10%;" scope="col">Critère</th>
+                    <th style="width: 30%;" scope="col">Titre de la proposition (140 car. max)</th>
+                    <th style="width: 50%;" scope="col">Détail de la proposition</th>
+                    <th style="width: 10%;" scope="col">Priorité ?</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in cat.crits%}
+                <tr>
+                    <td class="text-center">
+                        {{c.titre}}
+                        <br/>
+                        <div class="ancre" id="{{c.id}}">
+                            <button type="submit" class="plus" name="saveandcontinue" value="{{c.id}}"
+                                    title="Ajouter un nouveau champs libre (uniquement si tous les champs sont remplis)">
+                                <p>+</p>
+                            </button>
+                        </div>
+                    </td>
+                    {% for pro in c.pros%}
+                    <td>
+                        <textarea maxlength="140" style="width:100%" rows="2"
+                                  name="t-{{pro.id}}">{%if pro.titre is not None%}{{pro.titre}}{%endif%}</textarea>
+                    </td>
+                    <td>
+                        <textarea style="width:100%" rows="2"
+                                  name="d-{{pro.id}}">{%if pro.description is not None%}{{pro.description}}{%endif%}</textarea>
+                    </td>
+                    <td class="form-check">
+                        <input class="form-check-input" type="checkbox" name="prio" value="{{pro.id}}"
+                               {%if pro is not None and pro.estUnePriorite%}checked{%endif%}>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    {% endfor %}
+                    <td>
+                        <textarea maxlength="140" style="width:100%" rows="2"
+                                  name="newt-{{c.id}}"></textarea>
+                    </td>
+                    <td>
+                        <textarea style="width:100%" rows="2"
+                                  name="newd-{{c.id}}"></textarea>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" name="new-prio" value="{{c.id}}">
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                {% endfor %}
+            </table>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary" name="cancel">Annuler</button>
+                <button type="submit" class="btn btn-primary" name="saveandcontinue">Enregistrer et continuer les
+                    modifications
+                </button>
+                <button type="submit" class="btn btn-primary" name="save">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

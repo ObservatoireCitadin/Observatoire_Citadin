@@ -1,0 +1,381 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block page_title %}{{l.ville}} -
+{%if l.nom is not None%}
+{{l.nom}}
+{% else %}
+Liste {{l.couleur}}
+{% endif %}
+{% endblock %}
+{% block metaDesc %}Consulter le programme de la liste
+{%if l.nom is not None%}{{l.nom}}{% else %}Liste {{l.couleur}}{% endif %}, candidates à l'élection muncipales à {{l.ville}}.
+{% endblock %}
+{% block content %}
+<section id="about" class="about roomy-40">
+    <div class="container">
+        <div class="row">
+            <div class="main_about">
+                <div class="col-md-5">
+                    <div class="about_content">
+                        {%if iframe is None or iframe is True%}
+                        <h5><i class="fa fa-angle-left"></i> <a href="/{{l.ville.url}}">{{l.ville}}</a></h5>
+                        {% else %}
+                        <h5><i class="fa fa-angle-left"></i> <a href="/iframe/{{l.ville.url}}">Comparateur</a></h5>
+                        {% endif %}
+                        <div class="col-md-8">
+                            <h1>
+                                {%if modif%}
+                                <small><a href="/edit/{{l.id}}"><i class="fa fa-pencil"></i></a></small>
+                                {% endif %}
+                                {%if l.nom is not None%}
+                                {{l.nom}}
+                                {% else %}
+                                Liste {{l.couleur}}
+                                {% endif %}
+                            </h1>
+                            <span class="text-center score_liste">
+                            {%if l.score is not None%}
+                            <strong>{{l.score}}%</strong>
+                            {% endif %}
+                            </span>
+                            <div class="separator_left"></div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="image_liste">
+                                {%if l.lienPhoto is not None%}
+                                <img class="image_ville_item" src="{{l.lienPhoto}}"
+                                     onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                     alt=""/>
+                                {%elif l.photo.url is not None%}
+                                <img class="image_ville_item" src="{{l.photo.url}}"
+                                     onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                     alt=""/>
+                                {% else %}
+                                <img class="image_ville_item" src="{% static '/images/teamwork.png' %}" alt=""/>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-center"></div>
+                            {%if l.teteDeListe is not None%}
+                            <h5>Tête de liste : {{l.teteDeListe}}</h5>
+                            {% endif %}
+                            {%if l.couleur is not None%}
+                            <h6><em>Couleur politique : {{l.couleur}}</em></h6>
+                            {% endif %}
+                            {%if l.slogan is not None%}
+                            {{l.slogan}}
+                            {% endif %}
+                            {%if l.presentation is not None%}
+                            <p>{{l.presentation}}</p>
+                            {% endif %}
+                            {%if l.site is not None%}
+                            <a target="_blank" href="{{l.site}}">Le site web de la liste</a>
+                            {% endif %}
+                        </div>
+                        {% for charte in l.chartes.all%}
+                        <div class="col-md-3 m-top-20 text-center">
+                            <div class="image_charte">
+                                <a {%if charte.site is not None%}href="{{charte.site}}"
+                                   target="_blank" {% endif %}
+                                   {%if charte.site is not None%}{% endif %}
+                                   tabindex="0"
+                                   role="button"
+                                   style="cursor: pointer;"
+                                   data-toggle="popover"
+                                   data-placement="auto"
+                                   data-trigger="hover"
+                                   data-html="true"
+                                   title="{{charte.titre}}"
+                                   data-content="{{charte.description}}">
+                                    {%if charte.photo.url is not None%}
+                                    <img class="image_ville_item" src="{{charte.photo.url}}" alt=""/>
+                                    {%elif charte.lienPhoto is not None%}
+                                    <img class="image_ville_item" src="{{charte.lienPhoto}}"
+                                         onerror="this.onerror=null; this.src='{% static '/images/teamwork.png' %}'"
+                                         alt=""/>
+                                    {% else %}
+                                    <img class="image_ville_item" src="{% static '/images/teamwork.png' %}" alt=""/>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-12 text-center m-top-30">
+                            <button type="button" name="follow" class="btn btn-info" data-toggle="modal"
+                                    data-target="#follow" title="Suivre les actualités de {{l.ville.nom}}">
+                                <i class="fa fa-bell"></i>
+                            </button>
+                            <button type="button" name="signaler" class="btn btn-warning" data-toggle="modal"
+                                    data-target="#signaler" title="Signaler une anomalie">
+                                <i class="fa fa-exclamation-triangle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="about_accordion wow fadeIn">
+                        <div id="faq_main_content" class="faq_main_content">
+                            <h6 class="open"><i class="fa fa-star text-primary"></i>Les priorités de la liste</i></h6>
+                            <div class="open">
+                                <div class="content">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Catégorie</th>
+                                            <th scope="col">Critère</th>
+                                            <th scope="col">Promesse</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for p in prio%}
+                                        <tr>
+                                            <td>{{p.critere.categorie.titre}}</td>
+                                            <td>{{p.critere.titre}}</td>
+                                            <td>
+                                                <div class="bull" role="alert">
+                                                    {% if p.description is None%}
+                                                    {{p.titre}}
+                                                    {% else %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus"
+                                                       data-content="{{p.description}}">{{p.titre}}</a>
+                                                    {% endif %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- End off accordion item-1 -->
+                            {% for cat in cats%}
+                            <h6><i class="fa fa-angle-right"></i>{{cat.titre}}</h6>
+                            <div>
+                                <div class="content">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Critère</th>
+                                            <th scope="col">Promesse</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for c in l.ville.criteres.all%}
+                                        {% if cat.titre == c.categorie.titre%}
+                                        <tr>
+                                            <td style="vertical-align : middle;">{{c.titre}}</td>
+                                            <td>
+                                                {% for p in ps%}
+                                                {% if p.critere.titre == c.titre%}
+                                                <div class="bull" role="alert">
+                                                    {% if p.description == "" or p.description is None %}
+                                                    {{p.titre}}
+                                                    {% else %}
+                                                    <a tabindex="0" role="button" style="cursor: zoom-in;"
+                                                       data-container="body"
+                                                       data-toggle="popover"
+                                                       data-placement="auto" data-trigger="focus"
+                                                       data-content="{{p.description}}">{{p.titre}}</a>
+                                                    {% endif %}
+                                                    {% if p.estUnePriorite %} <i class="fa fa-star"></i>{%endif%}
+                                                </div>
+                                                {%endif%}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        {%endif%}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> <!-- End off accordion item-1 -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End off row-->
+    </div><!--End off container -->
+</section> <!--End off About section -->
+
+<!-- Modal formulaire de signalement -->
+<div class="modal fade" id="signaler" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Signaler une anomalie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <form class="modal-body" action="{% url 'liste' l.id %}" method="post">
+                {% csrf_token %}
+                <p>Une erreur est présente dans la description d'une liste ou d'une ville ? N'hésitez pas à nous
+                    remonter l'information ici pour qu'elle soit corrigée au plus vite !</p>
+                <div class="form-group">
+                    Adresse email :
+                    {{formS.email}}
+                </div>
+                <div class="form-group">
+                    {{formS.comment}}
+                </div>
+                <div class="form-group">
+                    {{formS.inform.label_tag}} {{formS.inform}}
+                </div>
+                <button type="submit" name="signaler" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal formulaire d'abonnement -->
+<div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form class="modal-content" action="{% url 'liste' l.id%}" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Pour suivre les actualités de {{v.nom}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                <h6>Adresse email : </h6>
+                {{formR.email}}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="formR" class="btn btn-primary">Je reste informé !</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Validation abonnement ville -->
+<div class="modal fade" id="modalFollow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">C'est dans la boîte !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Votre adresse mail a bien été enregistrée !<br/>
+                Pour nous aider à comparer plus de villes, <a href="/#aide">rendez-vous ici</a>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Validation Signalement -->
+<div class="modal fade" id="modalSignal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Merci pour votre signalement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Nous allons prendre connaissance de votre message et vous répondre au plus vite.
+
+                Pour nous aider à comparer plus de villes, <a href="/#aide">rendez-vous ici</a>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{%if modalFollow%}
+<script>
+    $(document).ready(function(){
+    $('#modalFollow').appendTo("body")
+    $("#modalFollow").modal('show');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{%endif%}
+{%if modalSignal%}
+<script>
+    $(document).ready(function(){
+    $('#modalSignal').appendTo("body")
+    $("#modalSignal").modal('show');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{%endif%}
+{% endblock %}
