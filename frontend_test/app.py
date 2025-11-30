@@ -196,6 +196,124 @@ def tab_atmo_indices(client: httpx.Client, base_url: str) -> None:
             st.error(f"Erreur: {exc}")
 
 
+def tab_insee_emploi(client: httpx.Client, base_url: str) -> None:
+    st.subheader("Nombre d'emplois par commune (INSEE)")
+    st.caption("Données issues du dataset DS_RP_EMPLOI_LT_COMP")
+
+    # User inputs
+    code_insee = st.text_input(
+        "Code INSEE de la commune",
+        value="69123",
+        help="Ex: 69123 pour Lyon",
+    )
+
+    # Filter options
+    st.markdown("**Filtres**")
+    
+    sexe_options = {
+        "Total": "_T",
+        "Femme": "F",
+        "Homme": "M",
+    }
+    sexe_selected = st.multiselect(
+        "Sexe",
+        options=list(sexe_options.keys()),
+        default=["Total"],
+    )
+    
+    empform_options = {
+        "Total": "_T",
+        "Non Salariés": "1",
+        "Salariés": "2",
+    }
+    empform_selected = st.multiselect(
+        "Forme d'emploi",
+        options=list(empform_options.keys()),
+        default=["Total"],
+    )
+    
+    emp_activity_options = {
+        "Total": "_T",
+        "Agriculture, sylviculture et pêche": "AZ",
+        "Industrie manufacturière, industries extractives et autres": "BE",
+        "Construction": "FZ",
+        "Services principalement marchands": "GU",
+        "Administration publique, enseignement, santé humaine et action sociale": "OQ",
+    }
+    emp_activity_selected = st.multiselect(
+        "Activité économique",
+        options=list(emp_activity_options.keys()),
+        default=["Total"],
+    )
+    
+    pcs_options = {
+        "Total": "_T",
+        "Agriculteurs": "1",
+        "Artisans, commerçants et chefs d'entreprise": "2",
+        "Cadres et professions intellectuelles supérieures": "3",
+        "Professions intermédiaires": "4",
+        "Employés": "5",
+        "Ouvriers": "6",
+    }
+    pcs_selected = st.multiselect(
+        "Profession et catégorie socioprofessionnelle",
+        options=list(pcs_options.keys()),
+        default=["Total"],
+    )
+
+    if st.button("Charger les données"):
+        if not code_insee.strip():
+            st.error("Veuillez saisir un code INSEE")
+            return
+        
+        try:
+            # Call the backend API
+            params = {"geo": f"COM-{code_insee.strip()}", "decode": "false"}
+            response_data = http_get(
+                client,
+                f"{base_url}/api/v1/insee_emploi/",
+                params=params,
+            )
+            
+            if "data" not in response_data or not response_data["data"]:
+                st.warning("Aucune donnée disponible pour cette commune")
+                return
+            
+            df = pd.DataFrame(response_data["data"])
+            
+            # Apply filters
+            sexe_codes = [sexe_options[s] for s in sexe_selected]
+            empform_codes = [empform_options[e] for e in empform_selected]
+            emp_activity_codes = [emp_activity_options[a] for a in emp_activity_selected]
+            pcs_codes = [pcs_options[p] for p in pcs_selected]
+            
+            df_filtered = df[
+                df["SEX"].isin(sexe_codes) &
+                df["EMPFORM"].isin(empform_codes) &
+                df["EMP_ACTIVITY"].isin(emp_activity_codes) &
+                df["PCS"].isin(pcs_codes)
+            ]
+            
+            if df_filtered.empty:
+                st.warning("Aucune donnée correspondant aux filtres sélectionnés")
+                return
+            
+            # Group by year and sum OBS_VALUE_NIVEAU
+            df_grouped = df_filtered.groupby("TIME_PERIOD")["OBS_VALUE_NIVEAU"].sum().reset_index()
+            df_grouped = df_grouped.sort_values("TIME_PERIOD")
+            
+            # Display bar chart
+            st.markdown(f"**Nombre d'emplois pour {code_insee}**")
+            st.bar_chart(df_grouped.set_index("TIME_PERIOD"))
+            
+            # Display the data table
+            st.markdown("**Données**")
+            st.dataframe(df_grouped)
+            
+        except Exception as exc:
+            st.error(f"Erreur lors de la récupération des données: {exc}")
+
+
 def tab_sdes_commune(client: httpx.Client, base_url: str) -> None:
     st.subheader("SDES - Commune")
     st.caption(
@@ -350,13 +468,15 @@ def main() -> None:
     base_url = render_sidebar()
     client = get_http_client()
 
-    tabs = st.tabs(["Health", "Indice ATMO", "SDES Commune"])
+    tabs = st.tabs(["Health", "Indice ATMO", "SDES Commune", "INSEE Emploi"])
     with tabs[0]:
         tab_health(client, base_url)
     with tabs[1]:
         tab_atmo_indices(client, base_url)
     with tabs[2]:
         tab_sdes_commune(client, base_url)
+    with tabs[3]:
+        tab_insee_emploi(client, base_url)
 
 
 if __name__ == "__main__":

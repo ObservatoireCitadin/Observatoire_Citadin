@@ -4,6 +4,7 @@ from app.api.v1.endpoints.health import router as health_router
 from app.api.v1.endpoints.air_quality import router as air_quality_router
 from app.api.v1.endpoints.atmo import router as atmo_router
 from app.api.v1.endpoints.sdes import router as sdes_router
+from app.api.v1.endpoints.insee_emploi import router as insee_emploi_router
 
 
 router = APIRouter()
@@ -15,3 +16,4 @@ router.include_router(
 )
 router.include_router(atmo_router, prefix="/atmo", tags=["atmo"])
 router.include_router(sdes_router, prefix="/sdes", tags=["sdes"])
+router.include_router(insee_emploi_router, prefix="/insee_emploi", tags=["insee"])

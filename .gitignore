@@ -79,4 +79,11 @@ site/
 # SQLite (if any local dev)
 *.sqlite3
 
+# Large data files
+backend/app/etl/INSEE/*.csv
+backend/app/etl/SDES/*.json
+frontend_test/data/*.xlsx
+frontend_test/data/~$*.xlsx
+
+
 
