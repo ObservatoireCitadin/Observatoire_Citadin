@@ -54,6 +54,7 @@ coverage.xml
 
 # Environments
 .env
+.env.supabase
 .venv
 env/
 venv/
@@ -82,6 +83,7 @@ site/
 # Large data files
 backend/app/etl/INSEE/*.csv
 backend/app/etl/SDES/*.json
+backend/data/
 frontend_test/data/*.xlsx
 frontend_test/data/~$*.xlsx
 
