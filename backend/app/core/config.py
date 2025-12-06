@@ -16,6 +16,7 @@ class Settings(BaseModel):
     ATMO_API_KEY: str = ""
     ATMO_USERNAME: str = ""
     ATMO_PASSWORD: str = ""
+    SDES_BASE_URL_API: str = "https://data.statistiques.developpement-durable.gouv.fr:443/dido/api/v1"
 
     @property
     def sqlalchemy_database_uri(self) -> str:
