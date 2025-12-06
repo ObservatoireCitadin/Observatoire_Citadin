@@ -85,8 +85,15 @@ WSGI_APPLICATION = 'cyw.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.tphkceccsjdvxgzowzqv',
+        'PASSWORD': '&C$Zl9XX3draZkmselQJ',
+        'HOST': 'aws-1-eu-west-3.pooler.supabase.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
